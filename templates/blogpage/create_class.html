@@ -1,0 +1,28 @@
+{% extends 'blogpage\layout\base.html' %}
+{% load static %}
+
+{% block title %}
+Создать класс
+{% endblock title %}
+
+{% block nav %}
+<a href="{% url 'startpage' %}">
+    <button class="btn-to-page">На главную</button>
+</a>
+{% endblock nav %}
+
+{% block content %}
+<form method="post" class="model-form" id='class-modelform'>
+    {% csrf_token %}
+
+    <h3 style="margin-top: 0px; margin-bottom: 2px;" align="center">Код класса:</h3>
+    {{form.codenumber}}
+
+    <h3 style="margin-top: 3px; margin-bottom: 2px;" align="center">Пароль:</h3>
+    {{form.codeWord}}
+
+    <button class="model-form-submit" type="submit">
+        Создать
+    </button>
+</form>
+{% endblock content %}

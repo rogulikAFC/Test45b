@@ -1,0 +1,18 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">  
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/blogpage_style.css' %}">
+    <title>Справочник</title>
+</head>
+<body>
+    <h2 align="center">{{help_article.heading}}</h2>
+    <div class="content-block">
+        <p id="content">{{help_article.article}}</p>
+    </div>
+</body>
+</html>

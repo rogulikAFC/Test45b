@@ -1,0 +1,39 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+    <meta name="theme-color" content="#09192A">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{% static 'css/blogpage_style.css' %}">
+        <title>
+            {% block title %}{% endblock title %} - Test45
+        </title>
+    </head>
+
+    <body>
+
+        <header>
+            <h1 align="center" id="main-headine">Test45</h1>
+            <h3 align="center" id="main-headine2">Платформа для взаимопомощи</h3>
+        </header>
+
+        <nav class="cls-search-div">
+            {% block nav %}
+            {% endblock nav %}
+        </nav>
+
+        <main>
+            {% block content %}
+            {% endblock content %}
+        </main>
+
+        <!-- <footer>
+            Powered by Rogulik
+        </footer> -->
+    </body>
+
+</html>

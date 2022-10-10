@@ -1,0 +1,114 @@
+{% extends 'blogpage\layout\base.html' %}
+{% load static %}
+
+{% block title %}
+Ответ
+{% endblock title %}
+
+{% block nav %}
+<div class="classname-div">
+    <p class="cls-name" align="center">{{clsName}}</p>
+</div>
+
+<a href='{% url "classpage_articles_preview" URLcodenumber=codenumber %}'>
+    <button class="btn-to-page">Перейти к ответам</button>
+</a>
+{% endblock nav %}
+
+{% block content %}
+<div id="content-block">
+    <h3 align="center" style="margin:2px; color: rgb(184, 9, 67);">
+        {{article.headline}}
+    </h3>
+
+    <p id="content-text" style="margin:0px">
+        {{article.text}}
+    </p>
+
+    {% if images %}
+    {% for image in images %}
+    <div id="img-view-block">
+        <img src="{{ image.path }}" alt="Что-то пошло не так, картинка не прогрузилась(" id="article-img">
+        <p id="filename">
+            {{ image.filename }}
+        </p>
+
+        <a id="img-download" href="{{ image.path }}" download>
+            <p>
+                <скачать>
+            </p>
+        </a>
+    </div>
+    {% endfor %}
+    {% endif %}
+
+    {% if files %}
+    <hr align="center" style="width: 95%; margin-top: 10px; margin-bottom: 10px; color: rgba(9, 25, 42, 0.3);">
+    {% for file in files %}
+    <div id="file-view-block">
+        <div style="display: inline-flex; word-break: break-all;">
+            <svg style="width: 23px; margin-right: 5px; margin-left: 5px;" xmlns="http://www.w3.org/2000/svg"
+                shape-rendering="geometricPrecision" text-rendering="geometricPrecision"
+                image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 512 441.48">
+                <path
+                    d="m439.55 3.74 67.81 78.75c2.5 1.95 4.11 5 4.11 8.42 0 1.02-.14 2-.41 2.94l.94 336.97c0 5.86-4.76 10.62-10.62 10.62v.04H10.66C4.77 441.48 0 436.7 0 430.82V90.91c0-3 1.24-5.71 3.23-7.65L72.6 3.66c2.1-2.39 5.04-3.62 8-3.62V0h350.84c3.25 0 6.16 1.45 8.11 3.74zM34.05 80.25h443.24l-50.73-58.93H85.4L34.05 80.25zm316.63 169.79c6.9.3 11.81 2.57 14.64 6.88 7.68 11.51-1.96 23.76-10.09 30.9l-90.69 79.63c-7.72 8.53-18.71 8.53-26.42 0-10.53-12.29-63.8-59.72-83.42-81.81-6.8-7.65-15.21-18.1-8.13-28.72 2.84-4.31 7.74-6.58 14.65-6.88h44.43v-76.57c0-4.81 3.93-8.74 8.74-8.74h83.23c4.81 0 8.75 3.94 8.75 8.74v76.57h44.31z" />
+            </svg>
+
+            <p id="filename">
+                {{ file.filename }}
+            </p>
+        </div>
+
+        <a id="file-download" href="{{ file.path }}" download>
+            <p>
+                <скачать>
+            </p>
+        </a>
+    </div>
+    {% endfor %}
+    {% endif %}
+
+    <div class="rating-block">
+        <a href="{% url 'reaction_redirect' article_uuid=article.id value='1' %}">
+            <svg class="reaction" id="like">
+                <circle cx="11" cy="11" r="10" fill="#80B841" stroke="black" stroke-width="1px" />
+            </svg>
+        </a>
+
+        <p class="rating-count">{{article.rating}}</p>
+
+        <a href="{% url 'reaction_redirect' article_uuid=article.id value='-1' %}">
+            <svg class="reaction" id="dislike">
+                <circle cx="11" cy="11" r="10" fill="#B85348" stroke="black" stroke-width="1px" />
+            </svg>
+        </a>
+    </div>
+
+    <div id="comment-block">
+        <hr align="center" style="width: 95%; margin-top: 5px; margin-bottom: 3px; color: rgba(9, 25, 42, 0.3);">
+        <h3 align="center" style="margin:0px; color: rgb(184, 9, 67);">
+            Комментарии:
+        </h3>
+        {% if comments %}
+        {% for comment in comments %}
+        <div id="comment-view-block">
+            <div style="display: inline-flex;">
+                <p id="comment">
+                    {{comment.text}}
+                </p>
+            </div>
+        </div>
+        {% endfor %}
+        {% endif %}
+    </div>
+
+    <hr align="center" style="width: 95%; margin-top: 5px; margin-bottom: 3px; color: rgba(9, 25, 42, 0.3);">
+
+    <form id="comment-form" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form.text}}
+        <input type="submit" id="add-comment-btn" style="font-size: medium; display: none;">
+        <label for="add-comment-btn" id="add-comment">Отправить комментарий</label>
+    </form>
+</div>
+{% endblock content %}

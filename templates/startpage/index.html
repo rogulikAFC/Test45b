@@ -1,0 +1,46 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{% static 'css/blogpage_style.css' %}">
+
+        <title>TEST45</title>
+    </head>
+
+    <body>
+
+        <header>
+            <h1 align="center" id="main-headine">Test45</h1>
+            <h3 align="center" id="main-headine2">Платформа для взаимопомощи</h3>
+        </header>
+
+        <main>
+            <form id="cls-search-form" method="post">
+                <h3 style="margin-bottom: 2px;" align="center">Код класса:</h3>
+                {{search_form.class_code}}
+
+                <h3 style="margin-top: 3px; margin-bottom: 2px;" align="center">Пароль:</h3>
+                {{search_form.password}}
+
+                <input type="submit" id="cls-search" style="font-size: medium;">
+            </form>
+
+            <a align="center" href="{% url 'create_class' %}" style="font-size: medium; margin: 5px;"
+                class="help-button" align="right">Создать класс</a>
+        </main>
+
+        <!-- <footer>
+        Designed and powered by Rogulik
+    </footer> -->
+
+
+        <script src="{% static 'js/startpage/main.js' %}"></script>
+
+    </body>
+
+</html>

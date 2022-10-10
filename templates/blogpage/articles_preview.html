@@ -1,0 +1,44 @@
+{% extends "blogpage/layout/base.html" %}
+{% load static %}
+
+{% block title %}
+Ответы
+{% endblock title %}
+
+{% block nav %}
+<div class="classname-div">
+    <p class="cls-name" align="center">{{clsName}}</p>
+</div>
+
+<div>
+    <a href='{% url "classpage_articles_create" URLcodenumber=codenumber %}' id="article-create-link">
+        <button id="article-create-button" align="center">Добавить ответ</button>
+    </a>
+</div>
+{% endblock nav %}
+
+
+{% block content %}
+{% for article in articles %}
+<div class="article-selecter-block" align="center">
+    <h4 align="center" id="article-heading">
+        {{article.headline}}
+    </h4>
+
+    <div class="article-selecter-options">
+        <div class="article-selecter-date">
+            <p>
+                {{article.pub_date|date:"d.M.Y"}}
+            </p>
+        </div>
+
+        <a class="article-selecter-button-link"
+            href="{% url 'classpage_article_view' URLcodenumber=codenumber uuid=article.id %}">
+            <button class="article-selecter-button" \>
+                <p>смотреть</p>
+            </button>
+        </a>
+    </div>
+</div>
+{% endfor %}
+{% endblock content %}
